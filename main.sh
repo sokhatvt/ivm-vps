@@ -66,7 +66,7 @@ function nodeJS_menu {
             ;;
             "NPM_Install")
                 testNode
-                cd ~/ivm_app
+                cd ~/ivm-app
                 npm install
             ;;
             "Menu")
@@ -126,8 +126,9 @@ EOF
         case "$opt" in
             "Install")
                 sudo apt update
-                sudo apt install nginx
+                sudo apt install nginx               
                 nginx_cnf
+                sudo ufw allow 'Nginx Full'
             ;;
             "Remove")
                 sudo apt-get purge nginx nginx-common
@@ -163,7 +164,7 @@ function pm2_menu {
                     npm remove pm2 -g
                 ;;
                 "StartupNode")
-                    cd ~/ivm_app
+                    cd ~/ivm-app
                     pm2 start index.js
                     pm2 save
                     pm2 startup
@@ -172,7 +173,7 @@ function pm2_menu {
                     sudo env PATH=$PATH:"$nodeDir" "$pm2Dir" startup systemd -u "$USER" --hp "$HOME"                    
                 ;;
                 "StartNode")
-                    cd ~/ivm_app
+                    cd ~/ivm-app
                     pm2 start index.js
                 ;;
                 "StopNode")
