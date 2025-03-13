@@ -20,8 +20,8 @@ function mariaDb_menu {
                 
                 sudo mariadb -e "CREATE DATABASE IF NOT EXISTS ${MAINDB} CHARACTER SET utf8 COLLATE utf8_general_ci;"
                 sudo mariadb -e "DROP USER IF EXISTS ${USERDB};"
-                sudo mariadb -e "CREATE USER '${USERDB}'@'%' IDENTIFIED BY '${PASSWDDB}';"
-                sudo mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '${USERDB}'@'%' WITH GRANT OPTION;"
+                sudo mariadb -e "CREATE USER '${USERDB}'@'localhost' IDENTIFIED BY '${PASSWDDB}';"
+                sudo mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '${USERDB}'@'localhost' WITH GRANT OPTION;"
 
                 #sudo mariadb -e "CREATE USER ${USERDB}@localhost IDENTIFIED BY '${PASSWDDB}';"
                 #sudo mariadb -e "GRANT ALL PRIVILEGES ON ${MAINDB}.* TO '${USERDB}'@'localhost';"
@@ -91,8 +91,9 @@ server {
     
     index index.html index.htm;
     
-    client_max_body_size 25M;
+    client_max_body_size 150M;
     #server_name example2.com www.example2.com 192.168.1.254;
+    #return 301 https://$server_name$request_uri;
 
     location / {
         proxy_pass http://127.0.0.1:3000;

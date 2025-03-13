@@ -2,3 +2,7 @@
 # IVM-VPS
 
 Đây là script hỗ trợ cài đặt, thiết lập ứng dụng trên hệ điều hành Ubuntu để chạy ứng dụng quản lý invoice ( [ivm-app](https://github.com/sokhatvt/ivm-app) )
+
+## Ứng dụng cần thiết
+- `MariaDB` hệ quản trị cơ sở quản trị dữ liệu hoàn toàn miễn phí, phát triển từ mã nguồn gốc MySQL. Hệ quản trị cơ sở dữ liệu này được xem như lựa chọn thay thế hoàn hảo cho MySQL, bởi MariaDB sở hữu khả năng tương thích và hiệu suất hoạt động tốt hơn nhiều so với MySQL.
+- `NodeJS` là một nền tảng (Platform) được xây dựng trên nền tảng Javascript V8 Engine. Được xây dựng để phát triển những ứng dụng server side.
