@@ -20,8 +20,8 @@ function mariaDb_menu {
                 
                 sudo mariadb -e "CREATE DATABASE IF NOT EXISTS ${MAINDB} CHARACTER SET utf8 COLLATE utf8_general_ci;"
                 sudo mariadb -e "DROP USER IF EXISTS ${USERDB};"
-                sudo mariadb -e "CREATE USER '${USERDB}'@'localhost' IDENTIFIED BY '${PASSWDDB}';"
-                sudo mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '${USERDB}'@'localhost' WITH GRANT OPTION;"
+                sudo mariadb -e "CREATE USER '${USERDB}'@'%' IDENTIFIED BY '${PASSWDDB}';"
+                sudo mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '${USERDB}'@'%' WITH GRANT OPTION;"
 
                 #sudo mariadb -e "CREATE USER ${USERDB}@localhost IDENTIFIED BY '${PASSWDDB}';"
                 #sudo mariadb -e "GRANT ALL PRIVILEGES ON ${MAINDB}.* TO '${USERDB}'@'localhost';"
@@ -208,7 +208,8 @@ function ssl_menu {
                     sudo certbot delete
                     sudo apt-get purge certbot python3-certbot-nginx
                     sudo apt autoremove
-                    sudo systemctl reload nginx
+                    #sudo systemctl reload nginx
+                    echo "You must reset nginx config"
                 ;;
                 "Menu")
                     main_menu
