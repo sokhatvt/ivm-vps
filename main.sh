@@ -259,6 +259,37 @@ function ssh_menu {
             REPLY=
         done
 }
+function ivm-vps_menu {
+    init_title "ivm-vps"
+    select opt in Install Update Remove Menu;
+        do
+            echo "$opt"$'...\n'
+
+            case "$opt" in
+                "Install")
+                    cd ~
+                    git clone "https://github.com/sokhatvt/ivm-vps.git"
+                    # if ! command -v -- "main" > /dev/null 2>&1; then
+                    #     echo "alias main='~/ivm-vps/main.sh'" >> ~/.bashrc
+                    # fi
+                    chmod +x ~/ivm-vps/main.sh
+                ;;
+                "Update")
+                    cd ~/ivm-vps
+                    git pull origin master
+                ;;
+                "Remove")
+
+                ;;
+                "Menu")
+                    main_menu
+                    break
+                ;;
+            esac
+            init_title "SSH"
+            REPLY=
+        done
+}
 function init_title {
     echo $xline
     echo "${1:-Main Menu}"
@@ -277,8 +308,11 @@ function main_menu {
     clear
     init_title
 
-    submenu=("MariaDb"
+    submenu=(
+            "ivm-vps"
+            "MariaDb"
             "NodeJS"
+            "ivm-app"
             "Nginx"
             "PM2"
             "SSL"
@@ -288,6 +322,7 @@ function main_menu {
     do
         #echo "$sub ..."
         case "$sub" in
+            "ivm-vps") ivm-vps_menu ;;
             "MariaDb") mariaDb_menu ;;
             "NodeJS") nodeJS_menu ;;
             "Nginx") nginx_menu ;;
