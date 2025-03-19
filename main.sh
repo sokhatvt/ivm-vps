@@ -268,11 +268,15 @@ function ivm-vps_menu {
             case "$opt" in
                 "Install")
                     cd ~
+                    source ~/.bash_profile
+                    dirpath="$HOME/ivm-vps/main.sh"
+                    if ! alias "main" > /dev/null 2>&1; then 
+                        echo "alias main='$dirpath'" >> ~/.bash_profile
+                    fi
                     git clone "https://github.com/sokhatvt/ivm-vps.git"
-                    # if ! command -v -- "main" > /dev/null 2>&1; then
-                    #     echo "alias main='~/ivm-vps/main.sh'" >> ~/.bashrc
-                    # fi
-                    chmod +x ~/ivm-vps/main.sh
+
+                    chmod +x $dirpath
+                    source ~/.bash_profile
                 ;;
                 "Update")
                     cd ~/ivm-vps
@@ -305,7 +309,7 @@ function testNode {
 function main_menu {
     #Create menu
     #Match multiple conditions ;;&
-    clear
+    #clear
     init_title
 
     submenu=(
