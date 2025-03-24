@@ -17,3 +17,5 @@ Vào Terminal gõ:
 bash <(curl -Ss https://raw.githubusercontent.com/sokhatvt/ivm-vps/refs/heads/master/main.sh)
 ```
 ![](./img/main_menu.png)
+
+Các bạn nên cài đặt theo trình tự nếu không sẽ bị lỗi(MariaDB>>NodeJS>>ivm-app>>Nginx>>PM2>>SSL).

@@ -268,22 +268,53 @@ function ivm-vps_menu {
             case "$opt" in
                 "Install")
                     cd ~
-                    source ~/.bash_profile
+                    strSource="~/.bashrc"
+                    if [ ! -f $strSource ]; then
+                        strSource="~/.bash_profile"
+                    fi
+                    source $strSource
+                    
                     dirpath="$HOME/ivm-vps/main.sh"
                     if ! alias "main" > /dev/null 2>&1; then 
-                        echo "alias main='$dirpath'" >> ~/.bash_profile
+                        echo "alias main='$dirpath'" >> $strSource
                     fi
                     git clone "https://github.com/sokhatvt/ivm-vps.git"
 
                     chmod +x $dirpath
-                    source ~/.bash_profile
+                    source $strSource
                 ;;
                 "Update")
                     cd ~/ivm-vps
                     git pull origin master
                 ;;
                 "Remove")
+                    echo "Please remove folder ~/ivm-app"
+                ;;
+                "Menu")
+                    main_menu
+                    break
+                ;;
+            esac
+            init_title "SSH"
+            REPLY=
+        done
+}
+function ivm-app_menu {
+    init_title "ivm-app"
+    select opt in Install Update Remove Menu;
+        do
+            echo "$opt"$'...\n'
 
+            case "$opt" in
+                "Install")
+                    cd ~
+                    git clone "https://github.com/sokhatvt/ivm-app.git"
+                ;;
+                "Update")
+                    echo "Please signin to app and update"
+                ;;
+                "Remove")
+                    echo "Please remove folder ~/ivm-app"
                 ;;
                 "Menu")
                     main_menu
@@ -314,9 +345,9 @@ function main_menu {
 
     submenu=(
             "ivm-vps"
-            "MariaDb"
-            "NodeJS"
             "ivm-app"
+            "MariaDb"
+            "NodeJS"            
             "Nginx"
             "PM2"
             "SSL"
@@ -327,6 +358,7 @@ function main_menu {
         #echo "$sub ..."
         case "$sub" in
             "ivm-vps") ivm-vps_menu ;;
+            "ivm-app") ivm-app_menu ;;
             "MariaDb") mariaDb_menu ;;
             "NodeJS") nodeJS_menu ;;
             "Nginx") nginx_menu ;;
