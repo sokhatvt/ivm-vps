@@ -268,12 +268,12 @@ function ivm-vps_menu {
             case "$opt" in
                 "Install")
                     cd ~
-                    strSource="~/.bashrc"
+                    strSource="./.bashrc"
                     if [ ! -f $strSource ]; then
-                        strSource="~/.bash_profile"
+                        strSource="./.bash_profile"
                     fi
                     source $strSource
-                    
+
                     dirpath="$HOME/ivm-vps/main.sh"
                     if ! alias "main" > /dev/null 2>&1; then 
                         echo "alias main='$dirpath'" >> $strSource
